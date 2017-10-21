@@ -9,5 +9,5 @@ block content
   each article in articles
     h2= article.title
     include by_line
-    p= article
+    p= article.body
     a(href = "/articles/" + article.id) Read More &rarr;

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Article = require("../models").Article;
 
-
 /* GET articles listing. */
 router.get('/', function(req, res, next) {
   Article.findAll().then(function(articles) {
