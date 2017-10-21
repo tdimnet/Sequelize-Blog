@@ -1,10 +1,16 @@
 'use strict';
-
 var dateFormat = require('dateformat');
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = function(sequelize, DataTypes) {
   var Article = sequelize.define('Article', {
-    title: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: "Title is required"
+        }
+      }
+    },
     author: DataTypes.STRING,
     body: DataTypes.TEXT
   }, {
@@ -17,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       publishedAt: function() {
         return dateFormat(this.createdAt, "dddd, mmmm dS, yyyy, h:MM TT");
       },
-      shortDescription: function() {
+      shortDescription: function(){ 
         return this.body.length > 30 ? this.body.substr(0, 30) + "..." : this.body;
       }
     }
